@@ -1,12 +1,16 @@
 <template>
-    <h1>Welcome to explorer. Please choose currency in top menu</h1>
+    <v-container>
+        <h1>Welcome to explorer. Please choose currency in top menu</h1>
+        <ipfsInfo />
+    </v-container>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import ipfsInfo from "@/components/IpfsInfo.vue";
 export default {
     name: "Home",
-    components: {},
+    components: { ipfsInfo },
     computed: {
         ...mapGetters(["currency"]),
     },

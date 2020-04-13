@@ -13,10 +13,7 @@
         outlined
     >
         <template v-slot:selection="{ item }">
-            <img
-                :src="item.iconColor"
-                class="mr-3 selectedCurrencyIcon"
-            />
+            <img :src="item.iconColor" class="mr-3 selectedCurrencyIcon" />
             {{ item.name }}
         </template>
 
@@ -25,9 +22,7 @@
                 <v-list-item-action>
                     <img :src="item.iconColor" />
                 </v-list-item-action>
-                <v-list-item-content
-                    >{{ item.name }}
-                </v-list-item-content>
+                <v-list-item-content>{{ item.name }} </v-list-item-content>
             </v-list-item>
             <v-divider class=""></v-divider>
         </template>

@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import Queriable from "explorer-core/src/database/DAL/query/queriable";
 import IndexMap from "explorer-core/src/database/DAL/indexMap";
 import lessThan from "explorer-core/src/database/DAL/conditions/comparators/lessThan";
@@ -73,7 +73,9 @@ export default {
     computed: {
         ...mapGetters(["currency"]),
         valid() {
-            return this.comparatorName && this.column && this.values.length === this.comparator.props.length;
+            return (
+                this.comparatorName && this.column && Object.keys(this.values).length >= this.comparator.props.length
+            );
         },
         comparator() {
             if (this.comparatorName) return this.comparators.find(c => c.name === this.comparatorName);

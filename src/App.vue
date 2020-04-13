@@ -7,8 +7,8 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon>
-                <v-icon>mdi-magnify</v-icon>
+            <v-btn icon :to="{ name: 'Playground' }">
+                <v-icon>mdi-gamepad-variant</v-icon>
             </v-btn>
 
             <currencySelector />

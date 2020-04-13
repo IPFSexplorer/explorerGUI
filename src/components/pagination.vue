@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import Database from "explorer-core/src/database/DAL/database/databaseStore";
 import Queriable from "explorer-core/src/database/DAL/query/queriable";
 export default {

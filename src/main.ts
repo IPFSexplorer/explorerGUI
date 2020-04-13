@@ -3,32 +3,17 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import VueIpfs from "./plugins/ipfs";
 import vuetify from "./plugins/vuetify";
 import EnabledCurrencies from "./store/models/EnabledCurrencies";
 import IdentityProvider from "orbit-db-identity-provider";
-import { browserConfigAsync } from "explorer-core/src/ipfs/ipfsDefaultConfig";
-
-import IPFSconnector from "explorer-core/src/ipfs/IPFSConnector";
 import Database from "explorer-core/src/database/DAL/database/databaseStore";
 import VueMoment from "vue-moment";
+import { DbSyncStrategy } from "explorer-core/src/database/DAL/database/DbConnectOptions";
 
 Vue.use(VueMoment);
+Vue.use(VueIpfs);
 Vue.config.productionTip = false;
-
-(async () => {
-    IPFSconnector.setConfig(browserConfigAsync());
-    const node = (await IPFSconnector.getInstanceAsync()).node;
-
-    node.swarm.connect("/ip4/192.168.0.195/tcp/9878/ws/ipfs/QmTyBNkjGjomiJwJoDa2pGifLGsv3yaFu2benSwNGmgaQ4");
-    const identity = await IdentityProvider.createIdentity({
-        id: (await node.id()).id,
-    });
-
-    for (const curr of EnabledCurrencies) {
-        console.log("Connect to " + curr.databaseName);
-        Database.connect(curr.databaseName, identity);
-    }
-})();
 
 new Vue({
     router,
@@ -36,3 +21,17 @@ new Vue({
     vuetify,
     render: h => h(App),
 }).$mount("#app");
+
+Vue.prototype.$ipfs.then(async ipfs => {
+    const node = ipfs.node;
+
+    node.swarm.connect("/ip4/192.168.0.195/tcp/9878/ws/ipfs/QmYz4yfNAgCx4ZxafBy9fAXoHo6skA99VzYdBo41p6AUJM");
+    const identity = await IdentityProvider.createIdentity({
+        id: (await node.id()).id,
+    });
+
+    for (const curr of EnabledCurrencies) {
+        console.log("Connect to " + curr.databaseName);
+        Database.connect(curr.databaseName, identity, { syncStrategy: DbSyncStrategy.replace });
+    }
+});
