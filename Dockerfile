@@ -6,7 +6,8 @@ WORKDIR /usr/src/app
 COPY *.json ./
 
 RUN npm install -g typescript
-RUN npm install --global http-server
+RUN npm install -g http-server
+RUN npm install -g @vue/cli
 RUN apk add \
     python \
     make \
