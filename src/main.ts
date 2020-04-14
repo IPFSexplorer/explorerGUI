@@ -25,7 +25,6 @@ new Vue({
 Vue.prototype.$ipfs.then(async ipfs => {
     const node = ipfs.node;
 
-    node.swarm.connect("/ip4/192.168.0.195/tcp/9878/ws/ipfs/QmYz4yfNAgCx4ZxafBy9fAXoHo6skA99VzYdBo41p6AUJM");
     const identity = await IdentityProvider.createIdentity({
         id: (await node.id()).id,
     });

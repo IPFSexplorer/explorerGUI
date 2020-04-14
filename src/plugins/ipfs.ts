@@ -1,9 +1,31 @@
 import IPFSconnector from "explorer-core/src/ipfs/IPFSConnector";
-import { browserConfigAsync } from "explorer-core/src/ipfs/ipfsDefaultConfig";
+import Protector from "libp2p-pnet";
 
 const plugin = {
     install(Vue, opts = {}) {
-        IPFSconnector.setConfig(browserConfigAsync());
+        IPFSconnector.setConfig({
+            repo: "explorer",
+            config: {
+                Addresses: {
+                    Swarm: [
+                        "/ip4/127.0.0.1/tcp/9090/ws/p2p-websocket-star",
+                        "/ip4/127.0.0.1/tcp/9091/ws/p2p-webrtc-star",
+                    ],
+                },
+            },
+            libp2p: {
+                modules: {
+                    connProtector: new Protector(`/key/swarm/psk/1.0.0/
+/base16/
+30734f1804abb36a803d0e9f1a31ffe5851b6df1445bf23f96fd3fe8fbc9e793`),
+                },
+                config: {
+                    pubsub: {
+                        emitSelf: false,
+                    },
+                },
+            },
+        });
         Vue.prototype.$ipfs = IPFSconnector.getInstanceAsync();
     },
 };

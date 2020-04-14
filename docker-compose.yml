@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+    explorer1:
+        image: explorer:latest
+        build:
+            context: ./
+        network_mode: host
+        environment:
+            - port=8081
+
+    explorer2:
+        image: explorer:latest
+        build:
+            context: ./
+        network_mode: host
+        environment:
+            - port=8082
