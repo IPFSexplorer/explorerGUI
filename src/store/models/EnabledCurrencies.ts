@@ -9,4 +9,12 @@ export default [
         name: "Etheruem",
         unit: "Eth",
     }),
+    new Currency({
+        name: "DigiByte",
+        unit: "dgb",
+    }),
+    new Currency({
+        name: "Decred",
+        unit: "Dcr",
+    }),
 ];
