@@ -8,8 +8,8 @@ const plugin = {
             config: {
                 Addresses: {
                     Swarm: [
-                        "/ip4/" + window.location.hostname + "/tcp/19090/ws/p2p-websocket-star",
-                        "/ip4/" + window.location.hostname + "/tcp/19091/ws/p2p-webrtc-star",
+                        "/dns4/kancel.mucka.sk/tcp/19091/ws/p2p-webrtc-star",
+                        "/dns4/kancel.mucka.sk/tcp/19090/ws/p2p-websocket-star",
                     ],
                 },
             },
