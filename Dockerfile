@@ -1,5 +1,7 @@
 FROM node:12-alpine
 
+ENV port 8080
+
 WORKDIR /usr/src/app
 
 
@@ -17,6 +19,5 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-ENV envPort=$port
 WORKDIR /usr/src/app/dist
-CMD [ "http-server", "/usr/src/app/dist", "-p ${envPort}"]
+CMD [ "http-server", "/usr/src/app/dist"]

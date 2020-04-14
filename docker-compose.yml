@@ -5,13 +5,11 @@ services:
         build:
             context: ./
         network_mode: host
-        environment:
-            - port=8081
+        command: ["http-server", "/usr/src/app/dist", "-p 8081"]
 
     explorer2:
         image: explorer:latest
         build:
             context: ./
         network_mode: host
-        environment:
-            - port=8082
+        command: ["http-server", "/usr/src/app/dist", "-p 8082"]
