@@ -11,7 +11,7 @@
                 ></v-skeleton-loader>
             </slot>
 
-            <slot v-else v-bind:item="pageitems[i - 1]"> </slot>
+            <slot v-else v-bind:item="pageitems[i - 1]"></slot>
         </template>
 
         <v-card :max-width="maxWidth" class="mx-auto" outlined>

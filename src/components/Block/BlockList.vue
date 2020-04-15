@@ -1,7 +1,11 @@
 <template>
     <div>
         <v-card outlined class="queryMaker mx-auto">
-            <queryMaker :entity="new BlockEntity()" @change="queryChanged" :defaults="defaultQuery" />
+            <queryMaker
+                :entity="new BlockEntity()"
+                @change="queryChanged"
+                :defaults="defaultQuery"
+            />
         </v-card>
 
         <pagination :query="query">

@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
 import BlockList from "../components/Block/BlockList.vue";
 import BlockDetail from "../components/Block/BlockDetail.vue";
+import AddressDetail from "../components/Address/AddressDetail.vue";
 import Playground from "../views/Playground.vue";
 
 Vue.use(VueRouter);
@@ -22,6 +23,11 @@ const routes: Array<RouteConfig> = [
         path: "/currency/:currency/block/:blockHeight",
         name: "BlockDetail",
         component: BlockDetail,
+    },
+    {
+        path: "/currency/:currency/address/:address",
+        name: "Address",
+        component: AddressDetail,
     },
     {
         path: "/playground",

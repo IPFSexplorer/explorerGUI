@@ -11,8 +11,7 @@
             hide-details
             dense
             clearable
-        ></v-select
-        >is
+        ></v-select>is
         <v-select
             clearable
             :items="comparators"
@@ -69,6 +68,11 @@ export default {
         this.column = this.defaults.column;
 
         this.execute();
+    },
+    watch: {
+        currency() {
+            this.execute();
+        },
     },
     computed: {
         ...mapGetters(["currency"]),

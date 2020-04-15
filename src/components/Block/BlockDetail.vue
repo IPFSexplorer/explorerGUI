@@ -80,9 +80,6 @@ export default {
     },
     computed: {
         ...mapGetters(["currency", "findCurrency"]),
-        pageBlocks() {
-            return this.blocks.slice((this.page - 1) * this.pageSize, this.page * this.pageSize);
-        },
     },
     beforeRouteUpdate(to, from, next) {
         this.loadData(to.params.blockHeight);

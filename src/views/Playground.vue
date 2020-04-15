@@ -37,7 +37,12 @@
                     <h2>Write query</h2>
                     <prism-editor v-model="code" language="js"></prism-editor>
                     <v-card-actions>
-                        <v-btn outlined class="mx-auto" :disabled="loading" @click="runQuery">Execute</v-btn>
+                        <v-btn
+                            outlined
+                            class="mx-auto"
+                            :disabled="loading"
+                            @click="runQuery"
+                        >Execute</v-btn>
                     </v-card-actions>
                 </div>
             </v-card>
@@ -56,16 +61,19 @@
 <script lang="ts">
 import "prismjs";
 import "prismjs/themes/prism.css";
+import { mapGetters } from "vuex";
 import PrismEditor from "vue-prism-editor";
 import Loader from "@/components/Loader.vue";
 import Block from "explorer-core/src/models/Block";
 import Transaction from "explorer-core/src/models/Transaction";
-import InputsOutputs from "explorer-core/src/models/InputsOutputs";
-
+import Database from "explorer-core/src/database/DAL/database/databaseStore";
 export default {
     components: {
         "prism-editor": PrismEditor,
         Loader,
+    },
+    computed: {
+        ...mapGetters(["currency"]),
     },
     data() {
         return {
@@ -82,7 +90,9 @@ export default {
             this.loading = true;
             this.result = "";
             try {
-                console.log((this.result = await this.evalWithContext(this.$data.code)));
+                await Database.use(this.currency.databaseName).execute(async () => {
+                    console.log((this.result = await Promise.all(await this.evalWithContext(this.$data.code))));
+                });
             } catch (error) {
                 this.result = error;
                 throw error;
@@ -98,7 +108,6 @@ export default {
                 {
                     Block,
                     Transaction,
-                    InputsOutputs,
                 },
                 code,
             );

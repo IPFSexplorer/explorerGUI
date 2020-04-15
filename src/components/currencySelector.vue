@@ -7,7 +7,7 @@
         :items="currencies"
         item-value="unit"
         item-text="name"
-        @change="currencySelected"
+        v-model="currency"
         label="Currency"
         :menu-props="{ offsetY: true }"
         outlined
@@ -18,13 +18,13 @@
         </template>
 
         <template v-slot:item="{ item }">
-            <v-list-item dense class="">
+            <v-list-item dense class>
                 <v-list-item-action>
                     <img :src="item.iconColor" />
                 </v-list-item-action>
-                <v-list-item-content>{{ item.name }} </v-list-item-content>
+                <v-list-item-content>{{ item.name }}</v-list-item-content>
             </v-list-item>
-            <v-divider class=""></v-divider>
+            <v-divider class></v-divider>
         </template>
     </v-select>
 </template>
@@ -35,6 +35,14 @@ export default {
     name: "CurrencySelector",
     computed: {
         ...mapGetters(["currencies", "findCurrency"]),
+        currency: {
+            set: function(newValue) {
+                this.$store.commit("selectCurrency", newValue);
+            },
+            get: function() {
+                return this.$store.getters.currency;
+            },
+        },
     },
     methods: {
         ...mapActions(["addCurrency", "selectCurrency"]),
