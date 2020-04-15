@@ -53,10 +53,7 @@ export default {
         async updatePeers() {
             // eslint-disable-next-line no-constant-condition
             while (true) {
-                this.peers = [];
-                for (const curr of EnabledCurrencies) {
-                    this.peers = this.peers.concat(await PubSub.peers(curr.databaseName));
-                }
+                this.peers = (await (await this.$ipfs).node.swarm.peers()).map(p => p.addr.toString());
 
                 await delay(2000);
             }
